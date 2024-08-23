@@ -1,0 +1,25 @@
+version: '3.8'
+services:
+  backend:
+    image: bpengineer/spring-boot-docker:latest
+    container_name: happy_shamir
+    ports:
+      - "8080:8080"
+    environment:
+      SPRING_PROFILES_ACTIVE: "docker"
+    networks:
+      - my-network
+
+  frontend:
+    image: bpengineer/react-app:latest
+    container_name: tender_hugle
+    ports:
+      - "3000:3000"
+    networks:
+      - my-network
+    depends_on:
+      - backend
+
+networks:
+  my-network:
+    driver: bridge
